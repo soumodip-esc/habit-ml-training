@@ -29,7 +29,6 @@ for user_id, group in df.groupby('user_id'):
     group['days_since_start'] = (group['timestamp'] - first_day).dt.days
 
     # Feature 5: completion_rate_7d
-    # Average tasks_completed over last 7 rows
     group['completion_rate_7d'] = (
         group['tasks_completed']
         .rolling(window=7, min_periods=1)
@@ -46,7 +45,6 @@ for user_id, group in df.groupby('user_id'):
     )
 
     # Feature 7: current_streak
-    # Counts how many consecutive rows this user has been active
     group['current_streak'] = range(1, len(group) + 1)
 
     results.append(group)
